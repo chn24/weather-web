@@ -1,5 +1,6 @@
 import Logo from "../../../../assets/image/svg/logo.svg";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 const Header = () => {
   const [scroll, setScroll] = useState(false);
 
@@ -24,10 +25,10 @@ const Header = () => {
         }`,
       }}
     >
-      <div className="header-content">
+      <Link to="/" className="header-content">
         <img src={Logo} alt="React Logo" className="header-content-logo" />
         <span className="header-content-name">Fatk1d's Weather</span>
-      </div>
+      </Link>
     </div>
   );
 };
