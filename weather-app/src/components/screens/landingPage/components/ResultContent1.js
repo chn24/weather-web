@@ -16,6 +16,12 @@ const ResultContent1 = () => {
 
   const checkFavourite = () => {
     return favourite.some((location) => {
+      console.log(
+        "location....",
+        location,
+        ",     locationInfo.......",
+        locationInfo
+      );
       return Number(location.id) === Number(locationInfo?.place_id);
     });
   };

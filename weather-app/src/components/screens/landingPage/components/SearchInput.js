@@ -6,16 +6,12 @@ import {
 import { useSearchParams } from "react-router-dom";
 
 import axios from "axios";
-import { useDispatch } from "react-redux";
-
-import { setLL, setLoading } from "../../../../store/actions";
 
 const SearchInput = () => {
   const [inputValue, setInputValue] = useState("");
   const [selectedValue, setSelectedValue] = useState(null);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const dispatch = useDispatch();
   // const option = useRef([]);
 
   const handleInputChange = (value) => {
@@ -23,7 +19,6 @@ const SearchInput = () => {
   };
   const handleChange = (value) => {
     console.log(value);
-    dispatch(setLoading(true));
     setSearchParams({ location: `${value.lat}_${value.lon}` });
   };
 

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setTLAL } from "../../../../store/actions";
+import { setTLAL, setLoading } from "../../../../store/actions";
 import { getDate } from "../../../../utils/covert";
 import ResultContent1 from "./ResultContent1";
 import ResultContent2 from "./ResultContent2";
@@ -69,6 +69,7 @@ const Result = ({ location }) => {
   };
 
   useEffect(() => {
+    dispatch(setLoading(true));
     getTemp(location);
   }, [location]);
 
