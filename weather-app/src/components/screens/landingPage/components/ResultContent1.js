@@ -8,7 +8,7 @@ import { upperCaseFirstLetter } from "../../../../utils/upperCase";
 import { convertTempFToC } from "../../../../utils/covert";
 import { getWeatherIcon } from "../../../../utils/getIcon";
 
-const ResultContent1 = () => {
+const ResultContent1 = ({ location }) => {
   const dispatch = useDispatch();
   const curTemp = useSelector((state) => state.curTemp);
   const locationInfo = useSelector((state) => state.locationInfo);
@@ -37,8 +37,8 @@ const ResultContent1 = () => {
     } else {
       let newLocation = {
         id: locationInfo?.place_id,
-        lat: locationInfo?.lat,
-        long: locationInfo?.lon,
+        lat: location?.lat,
+        long: location?.long,
         value: locationInfo,
       };
 
@@ -52,11 +52,16 @@ const ResultContent1 = () => {
         <span>
           Location:
           {locationInfo?.address?.city_district ||
+            locationInfo?.address?.county ||
             locationInfo?.address?.city ||
             locationInfo?.address?.name ||
             locationInfo?.address?.suburb}
         </span>
-        <Button variant="light" onClick={handleFavouriteClick}>
+        <Button
+          variant="light"
+          onClick={handleFavouriteClick}
+          className="result-current-1-head-btn"
+        >
           {checkFavourite() ? <BsHeartFill /> : <BsHeart />}
         </Button>
       </div>

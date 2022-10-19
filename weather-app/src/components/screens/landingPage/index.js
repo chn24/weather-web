@@ -37,6 +37,7 @@ const LandingPage = () => {
 
   return location ? (
     <div className="landingPage">
+      <div className="landingPage-bg"></div>
       <Search setLocation={setLocation} />
       <Result location={location} />
     </div>
