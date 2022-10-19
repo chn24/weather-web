@@ -1,16 +1,16 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTLAL, setLoading } from "../../../../store/actions";
 import { getDate } from "../../../../utils/covert";
+import { getBg } from "../../../../utils/getBg";
+
 import ResultContent1 from "./ResultContent1";
 import ResultContent2 from "./ResultContent2";
 import ResultContent3 from "./ResultContent3";
 import Skeleton from "../../../common/Skeleton";
 
 const Result = ({ location }) => {
-  const [currentLocation, setCurrentLocation] = useState();
-
   const dispatch = useDispatch();
   const curTemp = useSelector((state) => state.curTemp);
   const airPolution = useSelector((state) => state.airPollution);
@@ -61,11 +61,6 @@ const Result = ({ location }) => {
 
     dispatch(setTLAL(curTemp, locationInfo, airPollution, false));
     firstTime.current = false;
-
-    setCurrentLocation({
-      lat: searchLocation.lat,
-      long: searchLocation.long,
-    });
   };
 
   useEffect(() => {
@@ -74,42 +69,58 @@ const Result = ({ location }) => {
   }, [location]);
 
   return (
-    <div className="result">
-      <div className="result-current">
-        {isLoading ? (
-          <>
-            <Skeleton
-              skeletonStyles={{
-                width: "100%",
-                height: "203.88px",
-                margin: "0 0 32px",
-              }}
-            />
-            <Skeleton
-              skeletonStyles={{
-                width: "100%",
-                height: "274px",
-                margin: "0 0 32px",
-              }}
-            />
-            <Skeleton
-              skeletonStyles={{
-                width: "100%",
-                height: "174.66px",
-                margin: "0 0 32px",
-              }}
-            />
-          </>
-        ) : (
-          <>
-            <ResultContent1 />
-            <ResultContent2 curTemp={curTemp} airPollution={airPolution} />
+    <React.Fragment>
+      <div
+        className="landingPage-bg"
+        style={{
+          backgroundImage: `url(${getBg(curTemp?.currentConditions?.icon)})`,
+        }}
+      ></div>
+      <div
+        className="result"
+        // style={{
+        //   backgroundImage: `url(${getBg(curTemp?.currentConditions?.icon)})`,
+        // }}
+      >
+        <div className="result-current">
+          {isLoading ? (
+            <>
+              <Skeleton
+                skeletonStyles={{
+                  width: "100%",
+                  height: "203.88px",
+                  margin: "0 0 32px",
+                }}
+              />
 
-            <ResultContent3 curTemp={curTemp} />
-          </>
-        )}
+              <Skeleton
+                skeletonStyles={{
+                  width: "100%",
+                  height: "174.66px",
+                  margin: "0 0 32px",
+                }}
+              />
+
+              <Skeleton
+                skeletonStyles={{
+                  width: "100%",
+                  height: "274px",
+                  margin: "0 0 32px",
+                }}
+              />
+            </>
+          ) : (
+            <>
+              <ResultContent1 location={location} />
+
+              <ResultContent3 curTemp={curTemp} />
+
+              <ResultContent2 curTemp={curTemp} airPollution={airPolution} />
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 };
 

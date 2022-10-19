@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { convertTempFToC, getDate } from "../../../../utils/covert";
 import { getWeatherIcon } from "../../../../utils/getIcon";
+import BlurSkeleton from "../../../common/BlurSkeleton";
 
 const FavouriteInfo = ({ data }) => {
   const [favouriteTemp, setFavouriteTemp] = useState(null);
@@ -26,13 +27,14 @@ const FavouriteInfo = ({ data }) => {
     getFavouriteTemp();
   }, []);
 
-  return (
+  return favouriteTemp ? (
     <Link
       to={`/?location=${data.lat}_${data.long}`}
       className="favourite-main-item favourite-main-item-common"
     >
       <span className="favourite-main-item-location">
         {data.value?.address?.city_district ||
+          data.value?.address?.county ||
           data.value?.address?.city ||
           data.value?.address?.name ||
           data.value?.address?.suburb}
@@ -48,6 +50,8 @@ const FavouriteInfo = ({ data }) => {
         RealFeel®{convertTempFToC(favouriteTemp?.currentConditions?.feelslike)}°
       </span>
     </Link>
+  ) : (
+    <BlurSkeleton className="favourite-main-item-common borRa10px" />
   );
 };
 

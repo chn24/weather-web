@@ -19,28 +19,41 @@ const ResultContent3 = ({ curTemp }) => {
 
   return (
     <div className="result-current-3 result-current-box">
-      <div className="result-current-3-btnBox">
-        <Button
-          variant="light"
-          className="result-current-3-btn"
-          onClick={handleLeft}
-        >
-          <BsArrowLeftCircle width={"100%"} />
-        </Button>
+      <div className="result-current-3-head">
+        <span>Hourly</span>
       </div>
-      <div ref={hourlyRef} className="result-current-hourlyBox">
-        {curTemp?.days[0]?.hours.map((data) => (
-          <Hourly data={data} key={data.datetime} />
-        ))}
-      </div>
-      <div className="result-current-3-btnBox">
-        <Button
-          variant="light"
-          className="result-current-3-btn"
-          onClick={handleRight}
-        >
-          <BsArrowRightCircle width={"100%"} />
-        </Button>
+      <div className="result-current-3-body">
+        <div className="result-current-3-body-btnBox">
+          <Button
+            variant="light"
+            className="result-current-3-body-btn"
+            onClick={handleLeft}
+          >
+            <BsArrowLeftCircle
+              style={{
+                width: "100%",
+              }}
+            />
+          </Button>
+        </div>
+        <div ref={hourlyRef} className="result-current-hourlyBox">
+          {curTemp?.days[0]?.hours.map((data, index) => (
+            <Hourly index={index} data={data} key={data.datetime} />
+          ))}
+        </div>
+        <div className="result-current-3-body-btnBox">
+          <Button
+            variant="light"
+            className="result-current-3-body-btn"
+            onClick={handleRight}
+          >
+            <BsArrowRightCircle
+              style={{
+                width: "100%",
+              }}
+            />
+          </Button>
+        </div>
       </div>
     </div>
   );
