@@ -6,42 +6,47 @@
 
   .landingPage .favourite {
     &-main {
-      flex-direction: column;
-      overflow-y: scroll;
+      &-btnBox {
+        display: none;
+      }
 
-      &-item {
-        flex-direction: row;
-        align-items: center;
-        padding: 8px 12px;
+      &-content {
+        flex-direction: column;
+        overflow-y: scroll;
+        width: 100%;
+        &-item {
+          flex-direction: row;
+          align-items: center;
+          padding: 8px 12px;
 
-        &-common {
-          width: 100%;
-          min-height: 48px;
-          height: 48px;
-          margin-right: 0;
-          margin-bottom: 8px;
-
-          &::before {
+          &-common {
+            width: 100%;
+            min-height: 48px;
             height: 48px;
+            margin: 0 0 8px;
+
+            &::before {
+              height: 48px;
+            }
+
+            &:last-child {
+              margin-bottom: 0;
+            }
           }
 
-          &:last-child {
-            margin-bottom: 0;
+          &-location {
+            height: max-content;
+            font-size: 14px;
           }
-        }
 
-        &-location {
-          height: max-content;
-          font-size: 14px;
-        }
+          &-temp {
+            font-size: 24px;
+            height: max-content;
+          }
 
-        &-temp {
-          font-size: 24px;
-          height: max-content;
-        }
-
-        &-realfeel {
-          display: none;
+          &-realfeel {
+            display: none;
+          }
         }
       }
     }
@@ -117,9 +122,50 @@
   }
 
   .hourly {
+    padding: 8px;
+
     &-content {
       &-img {
         width: 50px;
+      }
+
+      &-info {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .daily {
+    padding: 8px;
+
+    &-content {
+      &-img {
+        width: 50px;
+      }
+
+      &-info {
+        font-size: 18px;
+      }
+    }
+  }
+
+  .accordionItem {
+    &-head {
+      &-realfeel {
+        display: none;
+      }
+    }
+
+    &-body {
+      flex-direction: column;
+      align-items: center;
+
+      &-col {
+        width: 90%;
+
+        &-info {
+          font-size: 16px;
+        }
       }
     }
   }
@@ -130,6 +176,25 @@
     &-content {
       &-img {
         width: 25px;
+      }
+    }
+  }
+
+  .accordionItem {
+    &-head {
+      &-img {
+        width: 50px;
+      }
+
+      &-day,
+      &-temp {
+        font-size: 16px;
+      }
+    }
+
+    &-body {
+      &-col {
+        width: 100%;
       }
     }
   }

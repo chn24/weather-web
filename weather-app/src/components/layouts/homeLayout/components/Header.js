@@ -21,8 +21,9 @@ const Header = () => {
         background: `${
           scroll
             ? "#000000"
-            : "linear-gradient(180deg, #000000, rgba(255, 255, 255, 0))"
+            : "linear-gradient(180deg, #000c, rgba(255, 255, 255, 0))"
         }`,
+        transition: "0.5s",
       }}
     >
       <Link to="/" className="header-content">

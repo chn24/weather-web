@@ -19,6 +19,7 @@ const SearchInput = () => {
   };
   const handleChange = (value) => {
     console.log(value);
+    setSelectedValue(value);
     setSearchParams({ location: `${value.lat}_${value.lon}` });
   };
 
