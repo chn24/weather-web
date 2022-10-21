@@ -5,6 +5,7 @@ import fog from "../assets/image/conditionBg/fog.jpg";
 import hail from "../assets/image/conditionBg/hail.jpg";
 import partly_cloudy_day from "../assets/image/conditionBg/partly-cloudy-day.jpg";
 import partly_cloudy_night from "../assets/image/conditionBg/part-cloudy-night.jpg";
+import rain from "../assets/image/conditionBg/rain.jpg";
 import rain_snow_showers_day from "../assets/image/conditionBg/rain-snow-showers-day.jpg";
 import rain_snow_showers_night from "../assets/image/conditionBg/rain-snow-showers-night.jpg";
 import rain_snow from "../assets/image/conditionBg/rain-snow.webp";
@@ -42,6 +43,9 @@ export const getBg = (icon) => {
 
     case "partly-cloudy-night":
       return partly_cloudy_night;
+
+    case "rain":
+      return rain;
 
     case "rain-snow-showers-day":
       return rain_snow_showers_day;

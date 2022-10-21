@@ -30,28 +30,28 @@ const FavouriteInfo = ({ data }) => {
   return favouriteTemp ? (
     <Link
       to={`/?location=${data.lat}_${data.long}`}
-      className="favourite-main-item favourite-main-item-common"
+      className="favourite-main-content-item favourite-main-content-item-common"
     >
-      <span className="favourite-main-item-location">
+      <span className="favourite-main-content-item-location">
         {data.value?.address?.city_district ||
           data.value?.address?.county ||
           data.value?.address?.city ||
           data.value?.address?.name ||
           data.value?.address?.suburb}
       </span>
-      <div className="favourite-main-item-temp">
+      <div className="favourite-main-content-item-temp">
         <img
           src={getWeatherIcon(favouriteTemp?.currentConditions?.icon)}
           width={"32"}
         />
         <span>{convertTempFToC(favouriteTemp?.currentConditions?.temp)}°</span>
       </div>
-      <span className="favourite-main-item-realfeel">
+      <span className="favourite-main-content-item-realfeel">
         RealFeel®{convertTempFToC(favouriteTemp?.currentConditions?.feelslike)}°
       </span>
     </Link>
   ) : (
-    <BlurSkeleton className="favourite-main-item-common borRa10px" />
+    <BlurSkeleton className="favourite-main-content-item-common borRa10px" />
   );
 };
 

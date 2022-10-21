@@ -8,25 +8,15 @@ import { upperCaseFirstLetter } from "../../../../utils/upperCase";
 import { convertTempFToC } from "../../../../utils/covert";
 import { getWeatherIcon } from "../../../../utils/getIcon";
 
-const ResultContent1 = ({ location }) => {
+const ResultContent1 = ({ location, curTemp, locationInfo }) => {
   const dispatch = useDispatch();
-  const curTemp = useSelector((state) => state.curTemp);
-  const locationInfo = useSelector((state) => state.locationInfo);
   const favourite = useSelector((state) => state.favourite);
 
   const checkFavourite = () => {
     return favourite.some((location) => {
-      console.log(
-        "location....",
-        location,
-        ",     locationInfo.......",
-        locationInfo
-      );
       return Number(location.id) === Number(locationInfo?.place_id);
     });
   };
-
-  console.log(checkFavourite());
 
   const handleFavouriteClick = () => {
     if (checkFavourite()) {

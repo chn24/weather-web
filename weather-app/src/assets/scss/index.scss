@@ -9,6 +9,10 @@
 ///---------------------------------------------common
 @import './components//common//skeleton/index.scss';
 
+html {
+    scroll-behavior: smooth
+}
+
 .justifySpacebetween { 
     justify-content: space-between;
 }

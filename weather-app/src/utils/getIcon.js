@@ -5,6 +5,7 @@ import fog from "../assets/image/svg/icon/fog.svg";
 import hail from "../assets/image/svg/icon/hail.svg";
 import partly_cloudy_day from "../assets/image/svg/icon/partly-cloudy-day.svg";
 import partly_cloudy_night from "../assets/image/svg/icon/partly-cloudy-night.svg";
+import rain from "../assets/image/svg/icon/rain.svg";
 import rain_snow_showers_day from "../assets/image/svg/icon/rain-snow-showers-day.svg";
 import rain_snow_showers_night from "../assets/image/svg/icon/rain-snow-showers-night.svg";
 import rain_snow from "../assets/image/svg/icon/rain-snow.svg";
@@ -42,6 +43,9 @@ export const getWeatherIcon = (icon) => {
 
     case "partly-cloudy-night":
       return partly_cloudy_night;
+
+    case "rain":
+      return rain;
 
     case "rain-snow-showers-day":
       return rain_snow_showers_day;

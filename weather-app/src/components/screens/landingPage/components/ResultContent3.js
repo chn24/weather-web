@@ -8,11 +8,11 @@ const ResultContent3 = ({ curTemp }) => {
   const hourlyRef = useRef(null);
 
   const handleLeft = () => {
-    hourlyRef.current.scrollLeft -= 150;
+    hourlyRef.current.scrollLeft -= 250;
   };
 
   const handleRight = () => {
-    hourlyRef.current.scrollLeft += 150;
+    hourlyRef.current.scrollLeft += 250;
   };
 
   console.log("result 3");

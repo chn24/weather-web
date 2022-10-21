@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTLAL, setLoading } from "../../../../store/actions";
 import { getDate } from "../../../../utils/covert";
@@ -8,7 +8,8 @@ import { getBg } from "../../../../utils/getBg";
 import ResultContent1 from "./ResultContent1";
 import ResultContent2 from "./ResultContent2";
 import ResultContent3 from "./ResultContent3";
-import Skeleton from "../../../common/Skeleton";
+import ResultContent4 from "./ResultContent4";
+import BlurSkeleton from "../../../common/BlurSkeleton";
 
 const Result = ({ location }) => {
   const dispatch = useDispatch();
@@ -16,12 +17,20 @@ const Result = ({ location }) => {
   const airPolution = useSelector((state) => state.airPollution);
   const isLoading = useSelector((state) => state.loading);
   const firstTime = useRef(true);
+  const [result, setResult] = useState({
+    curTemp: null,
+    airPollution: null,
+    locationInfo: null,
+    fifthteenDays: null,
+    hasData: false,
+  });
 
   const getTemp = async (searchLocation) => {
     //console.log(searchLocation);
     let curTemp;
     let locationInfo;
     let airPollution;
+    let fifthteenDays;
 
     await axios
       .get(
@@ -59,7 +68,24 @@ const Result = ({ location }) => {
         console.log(error);
       });
 
-    dispatch(setTLAL(curTemp, locationInfo, airPollution, false));
+    await axios
+      .get(
+        `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${searchLocation.lat},${searchLocation.long}?key=YSZD9WTD6N2H7MTUUFGHJ3MLH`
+      )
+      .then((response) => {
+        fifthteenDays = response.data.days;
+      });
+
+    setResult({
+      ...result,
+      curTemp,
+      locationInfo,
+      airPollution,
+      fifthteenDays,
+      hasData: true,
+    });
+    dispatch(setLoading(false));
+    // dispatch(setTLAL(curTemp, locationInfo, airPollution, false));
     firstTime.current = false;
   };
 
@@ -73,7 +99,9 @@ const Result = ({ location }) => {
       <div
         className="landingPage-bg"
         style={{
-          backgroundImage: `url(${getBg(curTemp?.currentConditions?.icon)})`,
+          backgroundImage: `url(${getBg(
+            result?.curTemp?.currentConditions?.icon
+          )})`,
         }}
       ></div>
       <div
@@ -83,9 +111,10 @@ const Result = ({ location }) => {
         // }}
       >
         <div className="result-current">
-          {isLoading ? (
+          {isLoading || !result.hasData ? (
             <>
-              <Skeleton
+              <BlurSkeleton
+                className="result-current-box"
                 skeletonStyles={{
                   width: "100%",
                   height: "203.88px",
@@ -93,7 +122,8 @@ const Result = ({ location }) => {
                 }}
               />
 
-              <Skeleton
+              <BlurSkeleton
+                className="result-current-box"
                 skeletonStyles={{
                   width: "100%",
                   height: "174.66px",
@@ -101,7 +131,8 @@ const Result = ({ location }) => {
                 }}
               />
 
-              <Skeleton
+              <BlurSkeleton
+                className="result-current-box"
                 skeletonStyles={{
                   width: "100%",
                   height: "274px",
@@ -111,11 +142,20 @@ const Result = ({ location }) => {
             </>
           ) : (
             <>
-              <ResultContent1 location={location} />
+              <ResultContent1
+                location={location}
+                curTemp={result.curTemp}
+                locationInfo={result.locationInfo}
+              />
 
-              <ResultContent3 curTemp={curTemp} />
+              <ResultContent3 curTemp={result.curTemp} />
 
-              <ResultContent2 curTemp={curTemp} airPollution={airPolution} />
+              <ResultContent2
+                curTemp={result.curTemp}
+                airPollution={result.airPollution}
+              />
+
+              <ResultContent4 fifthteenDays={result.fifthteenDays} />
             </>
           )}
         </div>

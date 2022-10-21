@@ -18,6 +18,11 @@ export const getHour = (epoch) => {
   return format(date, "HH");
 };
 
+export const getDay = (epoch) => {
+  let date = new Date(epoch * 1000);
+  return format(date, "cccc");
+};
+
 export const convertTime = (epoch) => {
   let date = new Date(epoch * 1000);
   return format(date, "HH:mm"); //HH:mm MM/dd/yyyy
